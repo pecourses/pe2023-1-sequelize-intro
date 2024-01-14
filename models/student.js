@@ -9,7 +9,10 @@ module.exports = (sequelize, DataTypes) => {
      * The `models/index` file will call this method automatically.
      */
     static associate (models) {
-      // define association here
+      // GroupId
+      Student.belongsTo(models.Group, {
+        foreignKey: 'groupId',
+      });
     }
   }
   /* Обмеження
