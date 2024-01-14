@@ -1,5 +1,11 @@
 // sync db by model
-const { sequelize, Student, Group } = require('./models');
+const {
+  sequelize,
+  Student,
+  Group,
+  Subject,
+  StudentSubjects,
+} = require('./models');
 const { Op } = require('sequelize');
 
 // DROP TABLE IF EXISTS "Students" CASCADE;
@@ -284,4 +290,39 @@ const { Op } = require('sequelize');
   // const group1Inst = await Group.findByPk(1);
   // const studOfGroup1 = await group1Inst.getStudents({ raw: true });
   // console.log('studOfGroup1 :>> ', studOfGroup1);
+
+  // Student m:n Subject => students <= students_to_subjects => subjects
+
+  const subject1 = { title: 'Data Bases', hours: 100 };
+  const subject2 = { title: 'Web-programming', hours: 150 };
+
+  const studSubj1 = { studentId: 1, subjectId: 1, mark: 100 };
+  const studSubj2 = { studentId: 1, subjectId: 2, mark: 90 };
+  const studSubj3 = { studentId: 2, subjectId: 1, mark: 85 };
+  const studSubj4 = { studentId: 2, subjectId: 2, mark: 88 };
+
+  // await Subject.create(subject1);
+  // await Subject.create(subject2);
+
+  // await StudentSubjects.create(studSubj1);
+  // await StudentSubjects.create(studSubj2);
+  // await StudentSubjects.create(studSubj3);
+  // await StudentSubjects.create(studSubj4);
+
+  // Eager Loading
+
+  // const studentsWithSubjects = await Student.findAll({
+  //   raw: true,
+  //   include: Subject,
+  // });
+  // console.log('studentsWithSubjects :>> ', studentsWithSubjects);
+
+  // Lazy Loading
+
+  // Student.belongsToMany => student.getSubjects
+  // Subject.belongsToMany => subject.getStudents
+
+  const student1Inst = await Student.findByPk(1);
+  const subjOfStud1 = await student1Inst.getSubjects({ raw: true });
+  console.log('subjOfStud1 :>> ', subjOfStud1);
 })();
