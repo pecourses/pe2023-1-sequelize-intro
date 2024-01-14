@@ -258,4 +258,30 @@ const { Op } = require('sequelize');
   // const createdStudent2 = await Student.create(newStudent2);
   // const createdStudent3 = await Student.create(newStudent3);
   // console.log(createdStudent1, createdStudent2, createdStudent3);
+
+  // Eager Loading ~ JOINS - отримаємо інформацію з усіх моделей (foreign keys)
+  // const foundStudentsWithGroups = await Student.findAll({
+  //   raw: true,
+  //   include: 'Group',
+  // });
+
+  // console.log('foundStudentsWithGroups :>> ', foundStudentsWithGroups);
+
+  // const foundGroupsWithStudents = await Group.findAll({
+  //   raw: true,
+  //   include: 'Student',
+  // });
+  // console.log('foundGroupsWithStudents :>> ', foundGroupsWithStudents);
+
+  // Lazy loading - отримаємо інформацію з пов'язаної моделі (associations)
+
+  //  Student.belongsTo => student.getGroup(), ...
+  // const student1Inst = await Student.findByPk(1);
+  // const groupOfStud1 = await student1Inst.getGroup({ raw: true });
+  // console.log('groupOfStud1 :>> ', groupOfStud1);
+
+  // Group.hasMany => group.getStudents(), ...
+  // const group1Inst = await Group.findByPk(1);
+  // const studOfGroup1 = await group1Inst.getStudents({ raw: true });
+  // console.log('studOfGroup1 :>> ', studOfGroup1);
 })();
